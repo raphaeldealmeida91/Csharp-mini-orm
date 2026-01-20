@@ -28,23 +28,23 @@ MiniOrm/
 ├── Core/                        ← Logique principale de l’ORM
 │   ├── DbContext.cs             ← Point d’entrée, gestion de la connexion
 │   ├── DbSet.cs                 ← Implémentation de IQueryable<T>
-│   └── SqlQueryProvider.cs         ← Intercepte et exécute les expressions LINQ
+│   └── SqlQueryProvider.cs      ← Intercepte et exécute les expressions LINQ
 │
 ├── Mapping/                     ← Mapping Classes ↔ Tables
-│   ├── TableAttribute.cs
-│   ├── ColumnAttribute.cs
-│   ├── EntityMetadata.cs
+│   ├── TableAttribute.cs        ← Attribut [Table] pour associer une classe à une table SQL
+│   ├── ColumnAttribute.cs       ← Attribut [Column] pour associer une propriété à une colonne
+│   ├── EntityMetadata.cs        ← Contient les métadonnées d’une entité : table, colonnes, types
 │   └── EntityMapper.cs          ← Lit les métadonnées via reflection
 │
 ├── Linq/                        ← Expression trees et traduction SQL
 │   ├── SqlExpressionVisitor.cs  ← Analyse les expressions LINQ
 │   ├── SqlQueryExecutor.cs      ← Exécute le SQL et matérialise les objets
-│   ├── QueryTranslator.cs       ← 
-│   └── SqlWhereClause.cs        ← 
+│   ├── QueryTranslator.cs       ← Traduit un arbre d’expression LINQ complet en SqlWhereClause + projections + limites
+│   └── SqlWhereClause.cs        ← Représente un WHERE clause SQL avec ses paramètres (@p0, @p1…) pour éviter les injections
 │
 ├── Database/                    ← Initialisation et gestion SQLite
 │   └── DatabaseInitializer.cs   ← Création des tables et données test
-│   └── TableBuilder.cs        ← 
+│   └── TableBuilder.cs          ← Fournit des méthodes pour créer dynamiquement des tables et colonnes via code
 │
 ├── Entities/                    ← Entités mappées à la base
 │   └── User.cs
